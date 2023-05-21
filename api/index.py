@@ -13,19 +13,20 @@ class handler(BaseHTTPRequestHandler):
     capital = dic.get('capital')
 
     if country:
-        url = f'https://restcountries.com/v3.1/name/{country}'
+        url = f'https://restcountries.com/v3.1/name/{country}?fullText=true'
         res = requests.get(url)
         data = res.json()
-        result = data[0]['capital']
+        result = data[0]['capital'][0]
   
     if capital:
         url = f'https://restcountries.com/v3.1/capital/{capital}'
         res = requests.get(url)
         data = res.json()
-        result = data[0]['name']
+        result = data[0]['name']['common']
 
     self.send_response(200)
     self.send_header('Content-type', 'text/plain')
     self.end_headers()
     self.wfile.write(result.encode('UTF-8'))
+    
     return 

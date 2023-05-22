@@ -28,5 +28,8 @@ class handler(BaseHTTPRequestHandler):
     self.send_header('Content-type', 'text/plain')
     self.end_headers()
     self.wfile.write(result.encode('UTF-8'))
-    
+
+
+
     return 
+  
